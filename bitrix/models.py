@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -
 from django.db import models
 from django.db.models.base import ModelBase
+from django.utils.translation import ugettext_lazy as _
 
 from bitrix.conf import BitrixConf as btxsettings
 
@@ -32,4 +33,23 @@ class SearchPhrase(BitrixModel):
 
     def __unicode__(self):
         return self.phrase
+
+
+class User(BitrixModel):
+    login = models.CharField(_('username'), max_length=50)
+    password = models.CharField(_('password'), max_length=50)
+
+    active = models.CharField(_('active'),
+                              choises=(('Y', _('Yes')), ('N', _('No'))),
+                              default='Y')
+
+    name = models.CharField(_('first name'), max_length=50)
+    last_name = models.CharField(_('last name'), max_length=50)
+    email = models.EmailField(_('e-mail address'), max_length=255)
+
+    last_login = models.DateTimeField(_('last login'))
+    date_register = models.DateTimeField(_('date joined'))
+
+    def __unicode__(self):
+        return self.username
 
