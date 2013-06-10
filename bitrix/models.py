@@ -40,7 +40,8 @@ class User(BitrixModel):
     password = models.CharField(_('password'), max_length=50)
 
     active = models.CharField(_('active'),
-                              choises=(('Y', _('Yes')), ('N', _('No'))),
+                              max_length=1,
+                              choices=(('Y', _('Yes')), ('N', _('No'))),
                               default='Y')
 
     name = models.CharField(_('first name'), max_length=50)
