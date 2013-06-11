@@ -51,6 +51,9 @@ class User(BitrixModel):
     last_login = models.DateTimeField(_('last login'))
     date_register = models.DateTimeField(_('date joined'))
 
+    class Meta(BitrixModel.Meta):
+        db_table = btxsettings.DB_PREFIX + 'user'
+
     def __unicode__(self):
         return self.username
 
