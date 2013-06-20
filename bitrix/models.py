@@ -55,5 +55,51 @@ class User(BitrixModel):
         db_table = btxsettings.DB_PREFIX + 'user'
 
     def __unicode__(self):
-        return self.username
+        return self.login
+
+
+class IBlock(BitrixModel):
+
+    timestamp_x = models.DateTimeField(u'Добавлен')
+
+    type = models.CharField(u'Тип', max_length=50,
+                            db_column='IBLOCK_TYPE_ID')
+
+    code = models.CharField(u'Код', max_length=50,
+                            null=True)
+    name = models.CharField(u'Название', max_length=255)
+
+    active = models.CharField(_('active'),
+                              max_length=1,
+                              choices=(('Y', _('Yes')), ('N', _('No'))),
+                              default='Y')
+
+    sort = models.IntegerField(u'Порядок')
+
+    sections_name = models.CharField(u'Название секций', max_length=100,
+                                     null=True)
+    section_name = models.CharField(u'Название секции', max_length=100,
+                                     null=True)
+    elements_name = models.CharField(u'Название элементов', max_length=100,
+                                     null=True)
+    element_name = models.CharField(u'Название элемента', max_length=100,
+                                     null=True)
+
+    class Meta(BitrixModel.Meta):
+        db_table = btxsettings.DB_PREFIX + 'iblock'
+
+
+class IBlockSection(BitrixModel):
+    timestamp_x = models.DateTimeField(u'Добавлен')
+
+    class Meta(BitrixModel.Meta):
+        db_table = btxsettings.DB_PREFIX + 'iblock_section'
+
+
+class IBlockElement(BitrixModel):
+
+    timestamp_x = models.DateTimeField(u'Добавлен')
+
+    class Meta(BitrixModel.Meta):
+        db_table = btxsettings.DB_PREFIX + 'iblock_element'
 
