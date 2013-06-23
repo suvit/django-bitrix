@@ -3,10 +3,20 @@ django-bitrix
 
 1c-Bitrix models inside django
 
-Support tables
+Support models
 
 * Search Phrase
+* User
+
+        from bitrix.models import User as BUser
+        from django.contrib.auth.models import User
+        
+        for b_user in BUser.objects.iterator():
+            User.objects.create(username=slugify(b_user.login),
+                                password='md5:' + b_user.password)
+       
 
 TODO
 
-* add user and auth tables
+* group and auth tables
+* iblock, iblocksection and iblockelement
